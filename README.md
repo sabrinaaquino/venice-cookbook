@@ -2,7 +2,7 @@
 
 > Hands-on Python notebooks for building with private, uncensored, multimodal AI on Venice.
 
-Ten self-contained notebooks that walk through every Venice endpoint, including the things that make Venice different: **x402 wallet payments** (no API key, pay per call in USDC on Base), **E2EE inference** with **provable privacy** (encrypt client-side, only a hardware enclave can decrypt), and a **unified Crypto RPC** that talks to every major chain through a single key.
+Eleven self-contained notebooks that walk through every Venice endpoint, including the things that make Venice different: **x402 wallet payments** (no API key, pay per call in USDC on Base), **E2EE inference** with **provable privacy** (encrypt client-side, only a hardware enclave can decrypt), and a **unified Crypto RPC** that talks to every major chain through a single key.
 
 Every notebook runs in **Google Colab** with one click. No local setup needed.
 
@@ -22,6 +22,7 @@ Every notebook runs in **Google Colab** with one click. No local setup needed.
 | 07 | [x402 Wallet Payments](notebooks/07-x402-wallet-payments.ipynb) | One paid call, an autonomous agent with a transaction ledger, and pay-per-call vs flat-rate cost analysis. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sabrinaaquino/venice-cookbook/blob/main/notebooks/07-x402-wallet-payments.ipynb) |
 | 08 | [End-to-End Encryption](notebooks/08-e2ee-encryption.ipynb) | Privacy mode comparison table, full ECDH (secp256k1) + AES-GCM handshake in pure Python, before/after diff of what Venice sees, and attestation inspection. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sabrinaaquino/venice-cookbook/blob/main/notebooks/08-e2ee-encryption.ipynb) |
 | 09 | [Tools and Crypto RPC](notebooks/09-tools-and-rpc.ipynb) | Web Search (Brave ZDR), Web Scrape, Text Parser, multichain Crypto RPC with live cost-per-call from response headers, batched fan-out across Base/Optimism/Arbitrum/Polygon, and an LLM-powered onchain assistant. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sabrinaaquino/venice-cookbook/blob/main/notebooks/09-tools-and-rpc.ipynb) |
+| 10 | [Vision Understanding](notebooks/10-vision-understanding.ipynb) | Live catalog of vision-capable models, OCR + Pydantic structured extraction on a synthetic receipt, multi-image diff, vision-driven tool calling (refund vs escalate from a package photo), and a three-way vision bake-off. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sabrinaaquino/venice-cookbook/blob/main/notebooks/10-vision-understanding.ipynb) |
 
 ---
 
@@ -77,7 +78,8 @@ venice-cookbook/
 │   ├── 06-characters.ipynb
 │   ├── 07-x402-wallet-payments.ipynb
 │   ├── 08-e2ee-encryption.ipynb
-│   └── 09-tools-and-rpc.ipynb
+│   ├── 09-tools-and-rpc.ipynb
+│   └── 10-vision-understanding.ipynb
 ├── build_notebooks.py                 (orchestrates the builders)
 └── validate_notebooks.py              (syntax-checks every code cell)
 ```
