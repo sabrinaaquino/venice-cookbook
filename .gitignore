@@ -1,0 +1,20 @@
+.env
+.env.local
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
+*.egg-info/
+dist/
+build/
+out/
+node_modules/
+# generated demo artifacts
+assets/generated/
+*.mp3
+*.wav
+*.mp4
+*.png
+!assets/static/*.png

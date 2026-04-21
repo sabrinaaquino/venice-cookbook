@@ -1,0 +1,22 @@
+# Core
+openai>=1.50.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+ipython>=8.0.0
+ipykernel>=6.0.0
+
+# Embeddings + RAG demos
+numpy>=1.26.0
+scikit-learn>=1.4.0
+
+# Audio playback in notebooks (Colab has these by default; pinned for local)
+pydub>=0.25.1
+
+# x402 + E2EE
+web3>=6.20.0
+eth-account>=0.11.0
+coincurve>=20.0.0
+cryptography>=42.0.0
+
+# Pretty output
+rich>=13.7.0
