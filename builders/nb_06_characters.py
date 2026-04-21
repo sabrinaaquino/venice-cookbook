@@ -49,7 +49,7 @@ list_characters(limit=12)'''),
             "Pick a character slug from the table above and pass it as `character_slug` in "
             "`extra_body`. Everything else is a normal chat completion."),
         ("code",
-            '''def chat_as(character_slug: str, user_msg: str, model: str = "venice-uncensored") -> str:
+            '''def chat_as(character_slug: str, user_msg: str, model: str = "zai-org-glm-5-1") -> str:
     r = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": user_msg}],
@@ -113,7 +113,7 @@ def grounded_chat(character_slug: str, question: str, k: int = 3) -> str:
     context = "\\n".join(chunks[i] for i in top)
 
     r = client.chat.completions.create(
-        model="venice-uncensored",
+        model="zai-org-glm-5-1",
         messages=[
             {"role": "system", "content": (
                 "Answer the user using ONLY the context. If you cannot answer from it, say so.\\n"

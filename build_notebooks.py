@@ -20,6 +20,7 @@ from builders import (
     nb_07_x402,
     nb_08_e2ee,
     nb_09_tools,
+    nb_10_vision,
 )
 
 
@@ -34,6 +35,7 @@ BUILDERS = [
     ("07-x402-wallet-payments.ipynb",  nb_07_x402),
     ("08-e2ee-encryption.ipynb",       nb_08_e2ee),
     ("09-tools-and-rpc.ipynb",         nb_09_tools),
+    ("10-vision-understanding.ipynb",  nb_10_vision),
 ]
 
 

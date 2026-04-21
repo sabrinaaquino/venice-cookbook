@@ -146,7 +146,7 @@ r = requests.post(
         "Content-Type":     "application/json",
     },
     json={
-        "model":    "kimi-k2-5",
+        "model":    "kimi-k2-6",
         "messages": [{"role": "user", "content": "Hi from an x402 wallet, in 8 words."}],
     },
     timeout=60,
@@ -183,7 +183,7 @@ print(json.dumps(r.json(), indent=2)[:1500])'''),
             "const venice = new VeniceClient(process.env.WALLET_KEY)\n"
             "await venice.topUp(10) // $10 USDC on Base, signs and submits in one call\n"
             "const r = await venice.chat({\n"
-            "  model: 'kimi-k2-5',\n"
+            "  model: 'kimi-k2-6',\n"
             "  messages: [{ role: 'user', content: 'Hello!' }],\n"
             "})\n"
             "```\n\n"

@@ -82,7 +82,7 @@ pd.DataFrame(results)[["title", "date", "url"]]'''),
     body = r.json()
     return body.get("content") or body.get("markdown") or body.get("text") or ""
 
-def summarize_url(url: str, model: str = "llama-3.3-70b") -> str:
+def summarize_url(url: str, model: str = "kimi-k2-6") -> str:
     md = scrape(url)
     if not md:
         return "(scraper returned empty content)"
@@ -303,7 +303,7 @@ print("Second call: replayed?", second.headers.get("Idempotent-Replayed", "false
     }
 ]
 
-def run_onchain_agent(user_msg: str, model: str = "llama-3.3-70b") -> str:
+def run_onchain_agent(user_msg: str, model: str = "kimi-k2-6") -> str:
     messages = [
         {"role": "system", "content": (
             "You are an on-chain assistant. When the user asks about balances, blocks, contracts, or transactions, "

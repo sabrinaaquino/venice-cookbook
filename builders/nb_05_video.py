@@ -25,8 +25,10 @@ def cells() -> list[Cell]:
             "4. **Image-to-video**: animate a still you generated in notebook 03.\n"
             "5. **Reference-to-video**: keep a character consistent across shots.\n"
             "6. **Cleanup**: `complete` the job and free the stored media.\n\n"
-            "**Cost:** quotes are free. A typical 5-second 720p clip is around $0.05 to $0.20 "
-            "depending on model and resolution. We will print the live quote before every job."),
+            "**Cost:** quotes are free. We stick to `seedance-2-0-fast-*` at 480p throughout, which "
+            "is the cheapest tier (around $0.34 for a 5-second clip) and the fastest to generate. "
+            "Switch to 720p or one of the premium families (`wan-2-7-*`, `kling-*`, `veo3-*`) when you "
+            "want production quality; the quote endpoint will tell you the bill before you commit."),
         ("markdown", "## Setup"),
         install_cell("pillow"),
         setup_cell(),
@@ -82,12 +84,12 @@ pd.DataFrame(rows)'''),
             "`/video/queue`, but it just returns `{ \"quote\": <usd> }`. Use this to surface costs "
             "to your end users, or to gate expensive jobs behind a confirmation."),
         ("code",
-            '''MODEL_T2V = "wan-2-7-text-to-video"
+            '''MODEL_T2V = "seedance-2-0-fast-text-to-video"
 
 quote = jpost("/video/quote", {
     "model":      MODEL_T2V,
     "duration":   "5s",
-    "resolution": "720p",
+    "resolution": "480p",
 }).json()
 
 print(f"This job will cost ${quote['quote']:.4f} USD ({quote['quote'] * 100:.2f} credits)")'''),
@@ -105,7 +107,7 @@ print(f"This job will cost ${quote['quote']:.4f} USD ({quote['quote'] * 100:.2f}
     """POST /video/queue. Returns the full JSON (model, queue_id, optionally download_url)."""
     return jpost("/video/queue", body, timeout=120).json()
 
-def poll_video(model: str, queue_id: str, *, every: int = 5, max_wait: int = 600) -> bytes | None:
+def poll_video(model: str, queue_id: str, *, every: int = 5, max_wait: int = 1500) -> bytes | None:
     """POST /video/retrieve in a loop until the job is done. Returns the MP4 bytes."""
     start = time.time()
     download_url = None
@@ -162,7 +164,7 @@ def generate_video(body: dict, out_name: str) -> Path:
     "model":        MODEL_T2V,
     "prompt":       "A lone gondola gliding through Venice canals at sunset, cinematic tracking shot, warm reflections on the water",
     "duration":     "5s",
-    "resolution":   "720p",
+    "resolution":   "480p",
     "aspect_ratio": "16:9",
 }, out_name="t2v.mp4")
 
@@ -174,7 +176,7 @@ display(Video(str(path), embed=True))'''),
             "describing the subject again. Pass either an HTTPS URL or a `data:image/png;base64,...` "
             "URL when you want to keep things fully local."),
         ("code",
-            '''MODEL_I2V = "wan-2-7-image-to-video"
+            '''MODEL_I2V = "seedance-2-0-fast-image-to-video"
 
 # Use a still you made in notebook 03 if it exists, otherwise pull a free Unsplash photo.
 candidate = Path("assets_generated/cyber_fox.png")
@@ -191,13 +193,13 @@ path = generate_video({
     "prompt":     "Camera slowly pushes in, soft wind ruffles the fur, subtle volumetric light",
     "image_url":  image_url,
     "duration":   "5s",
-    "resolution": "720p",
+    "resolution": "480p",
 }, out_name="i2v.mp4")
 
 display(Video(str(path), embed=True))'''),
         ("markdown",
             "## 5. Reference-to-video (consistency across shots)\n\n"
-            "When you need the same character in shot after shot, `wan-2-7-reference-to-video` "
+            "When you need the same character in shot after shot, `seedance-2-0-fast-reference-to-video` "
             "accepts an array of `reference_image_urls`. Refer to them in the prompt as `@Image1`, "
             "`@Image2`, etc. The endpoint is still `/video/queue`. Only the body changes."),
         ("code",
@@ -213,7 +215,7 @@ references = [
 quote = jpost("/video/quote", {
     "model":        MODEL_R2V,
     "duration":     "5s",
-    "resolution":   "720p",
+    "resolution":   "480p",
     "aspect_ratio": "16:9",
 }).json()
 print(f"Reference-to-video quote: ${quote['quote']:.4f}")
@@ -226,7 +228,7 @@ try:
         "model":                MODEL_R2V,
         "prompt":               "the cat walks slowly through the field, camera tracking from behind, golden hour light",
         "duration":             "5s",
-        "resolution":           "720p",
+        "resolution":           "480p",
         "aspect_ratio":         "16:9",
         "reference_image_urls": references,
     }, out_name="r2v.mp4")

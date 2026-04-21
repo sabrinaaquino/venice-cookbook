@@ -21,7 +21,7 @@ def cells() -> list[Cell]:
         )),
         ("markdown",
             "## What you will build\n\n"
-            "1. **Model bake-off:** run the same prompt across 3 Venice models, score them on "
+            "1. **Model bake-off:** run the same prompt across two Venice models, score them on "
             "latency / tokens / a quality rubric, and pick a winner.\n"
             "2. **Structured outputs:** force the model to return a strict Pydantic schema so your "
             "downstream code never crashes on a stray `\"sure!\"`.\n"
@@ -34,14 +34,14 @@ def cells() -> list[Cell]:
         setup_cell(),
         ("markdown",
             "## Sub-example 1: model bake-off\n\n"
-            "Picking a model is half the work. We run the same business-relevant prompt across three "
-            "Venice models and grade each response with a fourth model acting as judge. This is the "
-            "same pattern OpenAI uses internally to evaluate releases."),
+            "Picking a model is half the work. We run the same business-relevant prompt across two "
+            "Venice models (Kimi K2.6 and MiniMax M2.5) and grade each response with a judge model. "
+            "This is the same pattern OpenAI uses internally to evaluate releases."),
         ("code",
             '''import pandas as pd
 
-CANDIDATES = ["llama-3.3-70b", "venice-uncensored", "qwen3-235b-a22b-instruct-2507"]
-JUDGE     = "qwen3-235b-a22b-instruct-2507"  # supports response_format=json_object
+CANDIDATES = ["kimi-k2-6", "minimax-m25"]
+JUDGE     = "kimi-k2-6"  # supports response_format=json_object
 
 PROMPT = (
     "You are pitching a privacy-preserving AI to a non-technical CEO of a hospital. "
@@ -135,7 +135,7 @@ schema_prompt = (
 )
 
 r = client.chat.completions.create(
-    model="qwen3-235b-a22b-instruct-2507",  # supports response_format
+    model="kimi-k2-6",  # supports response_format
     messages=[
         {"role": "system", "content": schema_prompt},
         {"role": "user", "content": raw},
@@ -221,7 +221,7 @@ TOOLS = [
 
     for _ in range(4):
         r = client.chat.completions.create(
-            model="qwen3-235b-a22b-instruct-2507",
+            model="kimi-k2-6",
             messages=messages,
             tools=TOOLS,
             tool_choice="auto",

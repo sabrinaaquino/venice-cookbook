@@ -39,7 +39,7 @@ def cells() -> list[Cell]:
             "streaming) is identical."),
         ("code",
             '''resp = client.chat.completions.create(
-    model="venice-uncensored",
+    model="kimi-k2-6",
     messages=[
         {"role": "system", "content": "You are a sharp, irreverent assistant. Reply in 2 sentences."},
         {"role": "user", "content": "Pitch Venice to a developer in one tweet."},
@@ -49,7 +49,7 @@ print(resp.choices[0].message.content)'''),
         ("markdown", "## 4. Stream tokens as they arrive"),
         ("code",
             '''stream = client.chat.completions.create(
-    model="venice-uncensored",
+    model="kimi-k2-6",
     messages=[{"role": "user", "content": "Write a 4-line haiku about end-to-end encryption."}],
     stream=True,
 )
@@ -59,14 +59,14 @@ for chunk in stream:
 print()'''),
         ("markdown",
             "## 5. Benchmark three models\n\n"
-            "Same prompt, three models, side by side. We report wall-clock latency, tokens used, and the "
-            "first 120 characters of each response so you can eyeball quality. Pandas makes the table "
-            "render nicely both in Colab and on GitHub."),
+            "Same prompt, three flagship models side by side. We report wall-clock latency, tokens used, "
+            "and the first 120 characters of each response so you can eyeball quality. Pandas makes the "
+            "table render nicely both in Colab and on GitHub."),
         ("code",
             '''import pandas as pd
 
 PROMPT = "Explain why a Trusted Execution Environment is different from a regular cloud VM, in 3 bullets."
-MODELS = ["llama-3.3-70b", "venice-uncensored", "qwen3-235b-a22b-instruct-2507"]
+MODELS = ["kimi-k2-6", "claude-opus-4-6", "zai-org-glm-5-1"]
 
 rows = []
 for model in MODELS:
@@ -98,7 +98,7 @@ r = requests.post(
     "https://api.venice.ai/api/v1/chat/completions",
     headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
     json={
-        "model": "llama-3.3-70b",
+        "model": "kimi-k2-6",
         "messages": [{"role": "user", "content": "Say hi in one word."}],
     },
     timeout=30,

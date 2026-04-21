@@ -41,7 +41,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 EMBEDDING_MODEL = "text-embedding-bge-m3"
-CHAT_MODEL = "llama-3.3-70b"
+CHAT_MODEL = "kimi-k2-6"
 
 def embed(texts):
     """Batch-embed a list of strings. Returns an (n, d) numpy array."""
